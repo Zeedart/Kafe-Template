@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   DESIGN TOKENS
+   Change these values to re-theme the whole site. Tailwind v4 exposes each
+   token as a utility (e.g. --color-caramel -> bg-caramel / text-caramel).
+--------------------------------------------------------------------------- */
+@theme {
+  --color-cream: #f7f2e9;
+  --color-shell: #fbf8f3;
+  --color-sand: #ede2d1;
+  --color-line: #dccdb8;
+  --color-espresso: #2a1710;
+  --color-ink: #170c07;
+  --color-caramel: #b8742f;
+  --color-ember: #96581b;
+  --color-honey: #e3a969;
+  --color-clay: #6f5646;
+
+  /* next/font injects --font-cormorant and --font-dm on <html>. */
+  --font-sans: var(--font-dm), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-cormorant), ui-serif, Georgia, Cambria, serif;
+
+  --radius-card: 1.5rem;
+  --shadow-lift: 0 30px 70px -30px rgb(42 23 16 / 0.4);
+  --shadow-soft: 0 18px 44px -32px rgb(42 23 16 / 0.55);
+}
+
+/* ---------------------------------------------------------------------------
+   BASE
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchor targets clear of the fixed header. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-caramel);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-caramel);
+    color: #fff;
+  }
+
+  img,
+  svg {
+    display: block;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   SCROLL REVEAL
+   Only hidden when scripting is available, so the page is never blank for
+   visitors without JavaScript.
+--------------------------------------------------------------------------- */
+@media (scripting: enabled) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal-late {
+    transition-delay: 120ms;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   TEXTURE
+   A very light paper grain for the flat cream sections.
+--------------------------------------------------------------------------- */
+.texture-grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.texture-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------------------
+   MOTION PREFERENCES
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   PRINT
+--------------------------------------------------------------------------- */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
