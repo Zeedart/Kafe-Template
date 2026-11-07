@@ -40,6 +40,11 @@ npm run dev
 
 Open <http://localhost:3000>.
 
+> Previewing through a tunnel or hosted preview (Codespaces, ngrok, a cloud IDE)? Next.js blocks
+> cross-origin dev assets by default, so set `NEXT_ALLOWED_DEV_ORIGINS` to your preview
+> hostname(s), comma-separated, before starting the dev server. It has no effect on production
+> builds.
+
 ### Scripts
 
 | Command                | Purpose                      |
