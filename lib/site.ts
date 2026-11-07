@@ -164,8 +164,10 @@ export const site: SiteConfig = {
     address: {
       street: "14 Stillwater Lane, East Quarter",
       city: "Tripoli",
-      region: "Tripoli",
-      postalCode: "00000",
+      // Optional: leave empty if your region has no postal code, or fill in
+      // the district and postcode you use.
+      region: "",
+      postalCode: "",
       country: "LY",
     },
     mapUrl: "https://maps.google.com/?q=14+Stillwater+Lane+Tripoli",
@@ -392,8 +394,12 @@ export const site: SiteConfig = {
   },
 };
 
-/** Full display address, single line. */
+/**
+ * Full display address, single line. Empty region/postcode values are dropped
+ * so the output stays clean for locations that do not use them.
+ */
 export function formatAddress(): string {
   const { street, city, region, postalCode } = site.contact.address;
-  return `${street}, ${city}, ${region} ${postalCode}`;
+  const locality = [region, postalCode].filter(Boolean).join(" ");
+  return [street, city, locality].filter(Boolean).join(", ");
 }

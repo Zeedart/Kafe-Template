@@ -26,6 +26,12 @@ export function Hero() {
         className="from-ink via-ink/60 to-espresso/30 absolute inset-0 bg-gradient-to-t"
       />
 
+      {/* Keeps the transparent header legible over bright photography. */}
+      <div
+        aria-hidden="true"
+        className="from-ink/70 via-ink/25 absolute inset-x-0 top-0 h-52 bg-gradient-to-b to-transparent"
+      />
+
       <Container className="relative z-10 pt-32 pb-16 md:pb-24">
         <p className="text-honey flex items-center gap-3 text-[10px] font-semibold tracking-[0.32em] uppercase">
           <span aria-hidden="true" className="bg-honey/70 h-px w-8" />

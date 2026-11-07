@@ -42,8 +42,8 @@ export default function HomePage() {
       "@type": "PostalAddress",
       streetAddress: address.street,
       addressLocality: address.city,
-      addressRegion: address.region,
-      postalCode: address.postalCode,
+      ...(address.region ? { addressRegion: address.region } : {}),
+      ...(address.postalCode ? { postalCode: address.postalCode } : {}),
       addressCountry: address.country,
     },
     openingHoursSpecification: site.hours.map((entry) => ({
